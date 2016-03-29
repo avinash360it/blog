@@ -1,0 +1,44 @@
+<div class="container">
+
+    <div>
+        <form enctype="multipart/form-data" role="form" name="registerForm" novalidate>
+            <div class="form-group" ng-class="{'has-error': registerForm.name.$touched && registerForm.name.$invalid }">
+                <label>Name</label>
+                <input type="text" ng-model="register.name" name="name" required="true" class="form-control">
+                <div class="help-block" ng-messages="registerForm.name.$error" ng-if="registerForm.name.$touched">
+                    <p ng-message="required">Your Name is required</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': registerForm.email.$touched && registerForm.email.$invalid}">
+                <label>Email</label>
+                <input type="email" ng-model="register.email" name="email" required="true" class="form-control">
+                <div class="help-block" ng-messages="registerForm.email.$error" ng-if="registerForm.email.$touched">
+                    <p ng-message="required">Your email is required</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error' : registerForm.password.$touched && registerForm.password.$invalid}">
+                <label>Enter Password</label>
+                <input type="password" ng-minlength="6" ng-model="register.password" name="password" required="true" class="form-control">
+                <div class="help-block" ng-messages="registerForm.password.$error" ng-if="registerForm.password.$touched">
+                    <p ng-message="required">Your Password is required</p>
+                    <p ng-message="minlength">Password should contain at least 6 characters</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error' : registerForm.retypePassword.$touched && registerForm.retypePassword.$invalid}">
+                <label>Re-type Password</label>
+                <input type="password" ng-minlength="6" name="retypePassword" ng-model="register.retypePassword" required="true" class="form-control">
+                <div class="help-block" ng-messages="registerForm.retypePassword.$error" ng-if="registerForm.retypePassword.$touched">
+                    <p ng-message="required">Re-type Password is required</p>
+                    <p ng-message="minlength">Re-type Password should contain at least 6 characters</p>
+                    <p>{{matched}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Profile Pic</label>
+                <input type="file" name="register.profilePic" class="form-control" file-model="register.profilePic">
+
+            </div>
+            <button type="button" ng-click="submit()" class="btn btn-danger">Register</button>
+        </form>
+    </div>
+</div>

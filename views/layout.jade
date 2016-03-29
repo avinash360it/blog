@@ -1,0 +1,28 @@
+doctype html
+html(ng-app="blogApp")
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
+    script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js")
+    script(src="javascripts/angularApp.js")
+    script(src="javascripts/directives/fileModel.js")
+    script(src="javascripts/services/multipartForm.js")
+  body(ng-controller="homeController")
+      header
+        nav.navbar.navbar-default
+            div.container
+                div.navbar-header
+                    a.navbar-brand(href="/") BlogApp
+                ul.nav.navbar-nav.navbar-right
+                    li
+                        a(href="#") Home
+                    li
+                        a(href="#/blog") Blog
+                    li
+                        a(href="#/login") Login
+
+      <ng-view></ng-view>
+      block content

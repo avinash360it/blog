@@ -1,0 +1,25 @@
+<div class="container">
+    <div>
+        <form role="form" name="loginForm" novalidate>
+            <div class="form-group" ng-class="{ 'has-error': loginForm.email.$touched && loginForm.email.$invalid }">
+                <label>Email</label>
+                <input type="email" name="email" ng-model="login.email" required="true" class="form-control">
+                <div class="help-block" ng-messages="loginForm.email.$error" ng-if="loginForm.email.$touched">
+                    <p ng-message="required">Your email is required.</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': loginForm.email.$touched && loginForm.email.$invalid }">
+                <label>Password</label>
+                <input type="password" name="password" ng-model="login.password" ng-minlength="6" required="required" class="form-control">
+                <div class="help-block" ng-messages="loginForm.password.$error" ng-if="loginForm.password.$touched">
+                    <p ng-message="required">Your password is required.</p>
+                    <p ng-message="minlength">Your password is too short.</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <a href="#/register">New User?</a>
+            </div>
+            <button type="submit" ng-disabled="loginForm.$pristine || loginForm.$invalid" class="btn btn-success">Login</button>
+        </form>
+    </div>
+</div>
