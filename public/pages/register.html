@@ -1,6 +1,12 @@
 <div class="container">
 
     <div>
+        <div class="help-block" ng-messages="form" ng-if="formSubmitted && userSaved">
+            <p><h2>You have been registered!</h2></p>
+        </div>
+        <div class="help-block" ng-messages="form" ng-if="formSubmitted && !userSaved">
+            <p><h2>There was some error!</h2></p>
+        </div>
         <form enctype="multipart/form-data" role="form" name="registerForm" novalidate>
             <div class="form-group" ng-class="{'has-error': registerForm.name.$touched && registerForm.name.$invalid }">
                 <label>Name</label>
@@ -38,7 +44,7 @@
                 <input type="file" name="register.profilePic" class="form-control" file-model="register.profilePic">
 
             </div>
-            <button type="button" ng-click="submit()" class="btn btn-danger">Register</button>
+            <button type="submit" ng-click="submit()" ng-disabled="registerForm.$invalid || registerForm.$pristine" class="btn btn-danger">Register</button>
         </form>
     </div>
 </div>

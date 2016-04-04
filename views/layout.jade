@@ -4,12 +4,16 @@ html(ng-app="blogApp")
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.0.0/ng-tags-input.min.css')
+
     script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js")
     script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js")
     script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js")
     script(src="javascripts/angularApp.js")
     script(src="javascripts/directives/fileModel.js")
     script(src="javascripts/services/multipartForm.js")
+    script(src="javascripts/services/userData.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.0.0/ng-tags-input.min.js")
   body(ng-controller="homeController")
       header
         nav.navbar.navbar-default
@@ -19,10 +23,21 @@ html(ng-app="blogApp")
                 ul.nav.navbar-nav.navbar-right
                     li
                         a(href="#") Home
-                    li
-                        a(href="#/blog") Blog
-                    li
+                    li(ng-mouseover="showDD()",ng-mouseleave="hideDD()")
+                        a(href="#/") Blog
+                            span.caret
+                        ul.dropdown(ng-show="dropdown")
+                            li
+                                a(href="#/add") Add
+                            li
+                                a(href="#/list") List
+
+                    li(ng-show="loginStatus === true")
+                        a(href="#/profile/:id") Profile
+                    li(ng-show="loginStatus === false")
                         a(href="#/login") Login
+                    li(ng-show="loginStatus === true")
+                        a(href="#/" ng-click="logout()") Logout
+
 
       <ng-view></ng-view>
-      block content

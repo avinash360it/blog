@@ -5,26 +5,34 @@ var express = require('express');
 var path = require('path');
 var router = express.Router();
 var multer = require('multer');
-//var upload = multer({ dest: '/public/images/profile_pic/'});
-console.log(path.join(__dirname,'../public/uploads'));
-//var upload = multer({ dest: __dirname + '../public/uploads/'});
-var upload = multer({ dest: path.join(__dirname,'../public/uploads')});
 var User = require('../public/javascripts/models/user');
+var mime = require('mime');
+
+var storage = multer.diskStorage({
+    destination: function (req,res, cb) {
+        cb(null, path.join(__dirname,'../public/uploads'));
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '.'+mime.extension(file.mimetype));
+    }
+});
+
+var upload = multer({storage: storage});
 
 router.post('/process',upload.single('profilePic'), function (req,res,next) {
-//router.post('/process',upload, function (req,res,next) {
-    //console.log(req);
+
     var user = new User({
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        profilePic: req.file.path,
+        profilePic: req.file.filename,
         createdAt: new Date()
     }).save(function(err){
             if(err){
-                throw err;
+                //throw err;
+                res.send(false);
             }else{
-                console.log('User has been saved');
+                //console.log('User has been saved');
                 res.send(true);
             }
         });
